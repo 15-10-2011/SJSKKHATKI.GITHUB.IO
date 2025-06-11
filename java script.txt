@@ -1,0 +1,33 @@
+// Simple agent store (for demo only; not secure)
+const agents = {};
+
+document.getElementById("registerForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("regName").value.trim();
+  const mobile = document.getElementById("regMobile").value.trim();
+  const agentId = document.getElementById("regAgentId").value.trim();
+  const password = document.getElementById("regPassword").value.trim();
+
+  if (agents[agentId]) {
+    alert("Agent ID already exists!");
+    return;
+  }
+
+  agents[agentId] = { name, mobile, password };
+  alert("Agent registered successfully!");
+  this.reset();
+});
+
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const loginId = document.getElementById("loginId").value.trim();
+  const loginPassword = document.getElementById("loginPassword").value.trim();
+
+  if (agents[loginId] && agents[loginId].password === loginPassword) {
+    alert(`Welcome, Agent ${loginId}!`);
+  } else {
+    alert("Invalid login credentials.");
+  }
+
+  this.reset();
+});
